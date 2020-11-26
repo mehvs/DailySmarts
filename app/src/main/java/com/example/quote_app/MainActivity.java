@@ -46,9 +46,11 @@ public class MainActivity extends AppCompatActivity {
                 switch (position) {
                     case 0: {
                         tab.setText("DAILY QUOTE");
+                        break;
                     }
                     case 1: {
                         tab.setText("MY QUOTES");
+                        break;
                     }
 
                 }

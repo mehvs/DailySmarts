@@ -14,15 +14,17 @@ public class QuotePagerAdapter extends FragmentStateAdapter {
     @NonNull
     @Override
     public Fragment createFragment(int position) {
+        Fragment fragment = null;
         switch (position) {
             case 0:
-                return new FavoriteQuotesFragment();
+                fragment = new DailyQuoteFragment();
+                break;
             case 1:
-                return new DailyQuoteFragment();
-            default:
-                throw new IllegalArgumentException("There are not so many fragments");
-        }
+                fragment = new FavoriteQuotesFragment();
+                break;
 
+        }
+        return fragment;
 
     }
 
