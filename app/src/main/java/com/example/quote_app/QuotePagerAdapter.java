@@ -16,11 +16,11 @@ public class QuotePagerAdapter extends FragmentStateAdapter {
     public Fragment createFragment(int position) {
         switch (position) {
             case 0:
-                return new DailyQuoteFragment();
-            case 1:
                 return new FavoriteQuotesFragment();
+            case 1:
+                return new DailyQuoteFragment();
             default:
-                throw new IllegalArgumentException("There are not that much fragments");
+                throw new IllegalArgumentException("There are not so many fragments");
         }
 
 
