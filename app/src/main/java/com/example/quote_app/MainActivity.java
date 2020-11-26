@@ -6,12 +6,15 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Bundle;
+import android.view.View;
 
+import com.example.quote_app.databinding.ActivityMainBinding;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
 public class MainActivity extends AppCompatActivity {
 
+    private ActivityMainBinding binding;
     private Toolbar toolBar;
     private ViewPager2 viewPager2;
     private TabLayout tabLayout;
@@ -19,7 +22,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        View view = binding.getRoot();
+        setContentView(view);
 
         setToolBar();
         setViewPager2();
@@ -29,17 +35,17 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void setToolBar() {
-        toolBar = findViewById(R.id.toolBar);
+        toolBar = binding.toolBar;
         setSupportActionBar(toolBar);
     }
 
     private void setViewPager2() {
-        viewPager2 = findViewById(R.id.viewPager);
+        viewPager2 = binding.viewPager;
         viewPager2.setAdapter(new QuotePagerAdapter(this));
     }
 
     private void setTabLayout() {
-        tabLayout = findViewById(R.id.tabLayout);
+        tabLayout = binding.tabLayout;
         TabLayoutMediator tabLayoutMediator = new TabLayoutMediator(tabLayout, viewPager2, new TabLayoutMediator.TabConfigurationStrategy() {
             @Override
             public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {

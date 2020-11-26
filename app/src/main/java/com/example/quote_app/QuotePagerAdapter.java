@@ -22,10 +22,8 @@ public class QuotePagerAdapter extends FragmentStateAdapter {
             case 1:
                 fragment = new FavoriteQuotesFragment();
                 break;
-
         }
         return fragment;
-
     }
 
     @Override
