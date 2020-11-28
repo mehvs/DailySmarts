@@ -8,13 +8,13 @@ import androidx.room.PrimaryKey;
 public class Quote {
 
     @PrimaryKey(autoGenerate = true)
-    public int id;
+    private int id;
 
     @ColumnInfo(name = "quote_text")
-    public String quoteText;
+    private String quoteText;
 
     @ColumnInfo(name = "author")
-    public String author;
+    private String author;
 
     public Quote(String quoteText, String author){
         this.quoteText = quoteText;
