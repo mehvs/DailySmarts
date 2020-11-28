@@ -10,7 +10,8 @@ public final class Database {
 
     private static AppDatabase instance;
 
-    private Database() {}
+    private Database() {
+    }
 
     public static AppDatabase getInstance(Context context) {
         if (instance == null) {
