@@ -1,14 +1,16 @@
 package com.example.quote_app;
 
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager2.widget.ViewPager2;
 
-import android.os.Bundle;
-import android.view.View;
-
 import com.example.quote_app.databinding.ActivityMainBinding;
+import com.example.quote_app.retrofit.ApiServer;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
@@ -64,4 +66,22 @@ public class MainActivity extends AppCompatActivity {
         });
         tabLayoutMediator.attach();
     }
+
+    private void onGetQuoteClicked() {
+
+        ApiServer.getInstance().getRandomQuote(new ApiServer.ApiListener() {
+            @Override
+            public void onQuoteReceived(String quote) {
+               // binding.viewPager;
+            }
+
+            @Override
+            public void onFailure() {
+                Toast.makeText(MainActivity.this, "Something happened", Toast.LENGTH_LONG).show();
+            }
+        });
+
+
+    }
+
 }
