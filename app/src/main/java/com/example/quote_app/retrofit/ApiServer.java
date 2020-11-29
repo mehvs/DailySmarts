@@ -14,7 +14,7 @@ public class ApiServer {
     private ApiServer() {
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://forismatic.com/en/bc892c7baa/")
+                .baseUrl("http://api.forismatic.com/api/1.0/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
@@ -34,7 +34,7 @@ public class ApiServer {
 
                 if (response.isSuccessful()) {
 
-                    listener.onQuoteReceived(response.body().getQuoteText());
+                    listener.onQuoteReceived(response.body().getQuoteText(),response.body().getQuoteAuthor());
                 } else {
                     listener.onFailure();
                 }
@@ -51,7 +51,7 @@ public class ApiServer {
     }
 
     public interface ApiListener {
-        void onQuoteReceived(String quote);
+        void onQuoteReceived(String quote, String author);
 
         void onFailure();
     }

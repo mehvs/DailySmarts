@@ -6,6 +6,8 @@ import retrofit2.http.GET;
 
 public interface ApiQuoteService {
 
-    @GET("/quotes/random")
+    @GET("?method=getQuote&format=json&lang=en")
     Call<Quot> randomQuot();
+
+
 }
