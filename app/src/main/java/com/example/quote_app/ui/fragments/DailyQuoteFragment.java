@@ -1,4 +1,4 @@
-package com.example.quote_app;
+package com.example.quote_app.ui.fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

@@ -1,9 +1,11 @@
 package com.example.quote_app.retrofit;
 
 
+
 import com.google.gson.annotations.SerializedName;
 
-public class Quot {
+
+public class Quote {
 
     //{"quoteText":"Be less curious about people and more curious about ideas.  ",
     // "quoteAuthor":"Marie Curie ", "senderName":"",
@@ -15,7 +17,7 @@ public class Quot {
     @SerializedName("quoteAuthor")
     String quoteAuthor;
 
-    public Quot(String quoteText, String quoteAuthor) {
+    public Quote(String quoteText, String quoteAuthor) {
         this.quoteText = quoteText;
         this.quoteAuthor = quoteAuthor;
     }

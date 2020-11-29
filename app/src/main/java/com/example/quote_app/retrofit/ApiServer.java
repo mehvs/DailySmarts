@@ -28,9 +28,9 @@ public class ApiServer {
 
     public void getRandomQuote(final ApiListener listener) {
 
-        service.randomQuot().enqueue(new Callback<Quot>() {
+        service.randomQuote().enqueue(new Callback<Quote>() {
             @Override
-            public void onResponse(Call<Quot> call, Response<Quot> response) {
+            public void onResponse(Call<Quote> call, Response<Quote> response) {
 
                 if (response.isSuccessful()) {
 
@@ -41,7 +41,7 @@ public class ApiServer {
             }
 
             @Override
-            public void onFailure(Call<Quot> call, Throwable t) {
+            public void onFailure(Call<Quote> call, Throwable t) {
 
                 listener.onFailure();
             }
