@@ -1,9 +1,12 @@
-package com.example.quote_app;
+package com.example.quote_app.ui.adapters;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
+
+import com.example.quote_app.ui.fragments.DailyQuoteFragment;
+import com.example.quote_app.ui.fragments.FavoriteQuotesFragment;
 
 public class QuotePagerAdapter extends FragmentStateAdapter {
 

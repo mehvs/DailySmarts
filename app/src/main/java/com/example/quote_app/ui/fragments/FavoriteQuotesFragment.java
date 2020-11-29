@@ -1,4 +1,4 @@
-package com.example.quote_app;
+package com.example.quote_app.ui.fragments;
 
 import android.os.Bundle;
 
@@ -9,6 +9,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.quote_app.R;
+import com.example.quote_app.ui.adapters.RecyclerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
