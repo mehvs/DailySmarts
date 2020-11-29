@@ -5,7 +5,7 @@ import androidx.room.RoomDatabase;
 
 import com.example.quote_app.database.model.Quote;
 
-@Database(entities = Quote.class, version = 0)
+@Database(entities = Quote.class, version = 1)
 public abstract class AppDatabase extends RoomDatabase {
     public abstract QuoteDao quoteDao();
 }

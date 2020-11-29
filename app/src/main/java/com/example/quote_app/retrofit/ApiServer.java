@@ -34,7 +34,7 @@ public class ApiServer {
 
                 if (response.isSuccessful()) {
 
-                    listener.onQuoteReceived(response.body().getQuoteText(),response.body().getQuoteAuthor());
+                    listener.onQuoteReceived(response.body().getQuoteText(), response.body().getQuoteAuthor());
                 } else {
                     listener.onFailure();
                 }

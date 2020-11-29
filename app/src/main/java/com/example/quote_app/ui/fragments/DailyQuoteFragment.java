@@ -4,18 +4,19 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
 import com.example.quote_app.databinding.FragmentDailyQuoteBinding;
 import com.example.quote_app.retrofit.ApiServer;
 
+
+
+
+
 public class DailyQuoteFragment extends Fragment {
 
     private FragmentDailyQuoteBinding binding;
-    private TextView quote_txt_view;
-
 
     public DailyQuoteFragment() {
 
