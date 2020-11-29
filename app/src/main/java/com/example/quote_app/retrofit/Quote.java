@@ -1,6 +1,10 @@
 package com.example.quote_app.retrofit;
 
 
+
+import com.google.gson.annotations.SerializedName;
+
+
 public class Quote {
 
     //{"quoteText":"Be less curious about people and more curious about ideas.  ",
@@ -8,8 +12,9 @@ public class Quote {
     // "senderLink":"",
     // "quoteLink":"http://forismatic.com/en/a562642f67/"}
 
-
+    @SerializedName("quoteText")
     String quoteText;
+    @SerializedName("quoteAuthor")
     String quoteAuthor;
 
     public Quote(String quoteText, String quoteAuthor) {

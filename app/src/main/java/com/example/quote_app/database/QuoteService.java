@@ -1,11 +1,9 @@
 package com.example.quote_app.database;
 
 import android.app.Application;
-import android.content.Context;
 import android.os.AsyncTask;
 
 import androidx.lifecycle.LiveData;
-import androidx.room.Update;
 
 import com.example.quote_app.database.model.Quote;
 
