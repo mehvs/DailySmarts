@@ -1,22 +1,16 @@
 package com.example.quote_app.database.model;
 
-import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "quotes")
+@Entity(tableName = "quote_table")
 public class Quote {
-
     @PrimaryKey(autoGenerate = true)
     private int id;
-
-    @ColumnInfo(name = "quote_text")
     private String quoteText;
-
-    @ColumnInfo(name = "author")
     private String author;
 
-    public Quote(String quoteText, String author){
+    public Quote(String quoteText, String author) {
         this.quoteText = quoteText;
         this.author = author;
     }

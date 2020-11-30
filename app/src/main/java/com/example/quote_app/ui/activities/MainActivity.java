@@ -2,6 +2,7 @@ package com.example.quote_app.ui.activities;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,6 +11,7 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.quote_app.ui.adapters.QuotePagerAdapter;
 import com.example.quote_app.databinding.ActivityMainBinding;
+import com.example.quote_app.ui.viewmodels.QuoteViewModel;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
@@ -67,7 +69,6 @@ public class MainActivity extends AppCompatActivity {
         });
         tabLayoutMediator.attach();
     }
-
 
 
 }

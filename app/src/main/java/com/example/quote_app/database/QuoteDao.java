@@ -13,15 +13,8 @@ import java.util.List;
 
 @Dao
 public interface QuoteDao {
-
-    @Query("SELECT * FROM quotes")
-    LiveData<List<Quote>> getAll();
-
     @Insert
     void insert(Quote quote);
-
-    @Insert
-    void insertAll(Quote... quotes);
 
     @Update
     void update(Quote quote);
@@ -29,7 +22,9 @@ public interface QuoteDao {
     @Delete
     void delete(Quote quote);
 
-    @Query("DELETE FROM quotes")
-    void deleteAll();
+    @Query("DELETE FROM quote_table")
+    void deleteAllNotes();
 
+    @Query("SELECT * FROM quote_table")
+    LiveData<List<Quote>> getAllNotes();
 }
