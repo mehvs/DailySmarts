@@ -23,8 +23,8 @@ public interface QuoteDao {
     void delete(Quote quote);
 
     @Query("DELETE FROM quote_table")
-    void deleteAllNotes();
+    void deleteAllQuotes();
 
     @Query("SELECT * FROM quote_table")
-    LiveData<List<Quote>> getAllNotes();
+    LiveData<List<Quote>> getAllQuotes();
 }

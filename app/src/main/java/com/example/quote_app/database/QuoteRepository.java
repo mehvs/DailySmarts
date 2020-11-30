@@ -16,7 +16,7 @@ public class QuoteRepository {
     public QuoteRepository(Application application) {
         QuoteDatabase database = QuoteDatabase.getInstance(application);
         quoteDao = database.quoteDao();
-        allQuotes = quoteDao.getAllNotes();
+        allQuotes = quoteDao.getAllQuotes();
     }
 
     public void insert(Quote quote) {
@@ -90,7 +90,7 @@ public class QuoteRepository {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            quoteDao.deleteAllNotes();
+            quoteDao.deleteAllQuotes();
             return null;
         }
     }
