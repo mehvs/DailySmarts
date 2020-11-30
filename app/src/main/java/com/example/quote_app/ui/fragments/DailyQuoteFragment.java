@@ -6,17 +6,18 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 
+import com.example.quote_app.database.model.Quote;
 import com.example.quote_app.databinding.FragmentDailyQuoteBinding;
 import com.example.quote_app.retrofit.ApiServer;
-
-
-
+import com.example.quote_app.ui.viewmodels.QuoteViewModel;
 
 
 public class DailyQuoteFragment extends Fragment {
 
     private FragmentDailyQuoteBinding binding;
+    private QuoteViewModel quoteViewModel;
 
     public DailyQuoteFragment() {
 
@@ -26,6 +27,8 @@ public class DailyQuoteFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         onGetQuoteClicked();
+
+
     }
 
     @Override
@@ -33,9 +36,17 @@ public class DailyQuoteFragment extends Fragment {
 
         binding = FragmentDailyQuoteBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
+        binding.imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Quote quote = new Quote(binding.quoteTxtView.getText().toString(), binding.authorTxtView.getText().toString());
+                quoteViewModel = ViewModelProviders.of(getActivity()).get(QuoteViewModel.class);
+                quoteViewModel.insert(quote);
+            }
+        });
         return view;
 
-        // return inflater.inflate(R.layout.fragment_daily_quote, container, false);
+
     }
 
     private void onGetQuoteClicked() {

@@ -6,35 +6,35 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-import com.example.quote_app.database.QuoteService;
+import com.example.quote_app.database.QuoteRepository;
 import com.example.quote_app.database.model.Quote;
 
 import java.util.List;
 
 public class QuoteViewModel extends AndroidViewModel {
-    private QuoteService quoteService;
+    private QuoteRepository repository;
     private LiveData<List<Quote>> allQuotes;
 
     public QuoteViewModel(@NonNull Application application) {
         super(application);
-        quoteService = new QuoteService(application);
-        allQuotes = quoteService.getAll();
+        repository = new QuoteRepository(application);
+        allQuotes = repository.getAllQuotes();
     }
 
     public void insert(Quote quote) {
-        quoteService.insert(quote);
+        repository.insert(quote);
     }
 
     public void update(Quote quote) {
-        quoteService.update(quote);
+        repository.update(quote);
     }
 
     public void delete(Quote quote) {
-        quoteService.delete(quote);
+        repository.delete(quote);
     }
 
-    public void deleteAll() {
-        quoteService.deleteAll();
+    public void deleteAllQuotes() {
+        repository.deleteAllQuotes();
     }
 
     public LiveData<List<Quote>> getAllQuotes() {

@@ -23,7 +23,6 @@ public class MainActivity extends AppCompatActivity {
     private TabLayout tabLayout;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,7 +69,6 @@ public class MainActivity extends AppCompatActivity {
         });
         tabLayoutMediator.attach();
     }
-
 
 
 }

@@ -1,7 +1,6 @@
 package com.example.quote_app.retrofit;
 
 
-
 import com.google.gson.annotations.SerializedName;
 
 
