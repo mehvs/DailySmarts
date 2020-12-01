@@ -37,16 +37,11 @@ public class FavoriteQuotesFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         View view = inflater.inflate(R.layout.fragment_favorite_quotes, container, false);
 
-        recyclerView = view.findViewById(R.id.recyclerView);
-        recyclerAdapter = new RecyclerAdapter();
-        recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        recyclerView.setAdapter(recyclerAdapter);
+        buildRecyclerView(view);
 
         return view;
-
     }
 
     @Override
@@ -55,4 +50,21 @@ public class FavoriteQuotesFragment extends Fragment {
         quoteViewModel = new ViewModelProvider(this).get(QuoteViewModel.class);
         quoteViewModel.getAllQuotes().observe(getViewLifecycleOwner(), quotes -> recyclerAdapter.setQuotes(quotes));
     }
+
+
+
+    public void buildRecyclerView(View view){
+        recyclerView = view.findViewById(R.id.recyclerView);
+        recyclerAdapter = new RecyclerAdapter();
+        recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+        recyclerView.setAdapter(recyclerAdapter);
+        recyclerAdapter.setOnItemClickListener(new RecyclerAdapter.OnItemClickListener() {
+            @Override
+            public void onHeartClick(int position) {
+                quoteViewModel.delete(recyclerAdapter.getQuoteAt(position));
+            }
+        });
+    }
+
+
 }
