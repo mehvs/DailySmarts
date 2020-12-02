@@ -1,5 +1,6 @@
 package com.example.quote_app.ui.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,7 +22,6 @@ public class DailyQuoteFragment extends Fragment {
 
     private FragmentDailyQuoteBinding binding;
     private QuoteViewModel quoteViewModel;
-    private Boolean isClicked = false;
 
     public DailyQuoteFragment() {
 
@@ -31,7 +31,6 @@ public class DailyQuoteFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         onGetQuoteClicked();
-
 
     }
 
@@ -43,6 +42,7 @@ public class DailyQuoteFragment extends Fragment {
         quoteViewModel = ViewModelProviders.of(getActivity()).get(QuoteViewModel.class);
 
         setupHeartButton();
+        setupShareButton();
 
         return view;
     }
@@ -67,6 +67,8 @@ public class DailyQuoteFragment extends Fragment {
 
     private void setupHeartButton() {
         binding.imageView.setOnClickListener(new View.OnClickListener() {
+            Boolean isClicked = false;
+
             @Override
             public void onClick(View v) {
                 if (!isClicked) {
@@ -82,4 +84,21 @@ public class DailyQuoteFragment extends Fragment {
             }
         });
     }
+
+    private void setupShareButton() {
+        binding.shareImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String shareText = "\"" + binding.quoteTxtView.getText().toString() + "\" " + "-" + binding.authorTxtView.getText().toString();
+                Intent sendIntent = new Intent();
+                sendIntent.setAction(Intent.ACTION_SEND);
+                sendIntent.putExtra(Intent.EXTRA_TEXT, shareText);
+                sendIntent.setType("text/*");
+                Intent shareIntent = Intent.createChooser(sendIntent, null);
+                startActivity(shareIntent);
+            }
+        });
+    }
+
+
 }
