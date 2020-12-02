@@ -89,7 +89,7 @@ public class DailyQuoteFragment extends Fragment {
         binding.shareImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String shareText = "\"" + binding.quoteTxtView.getText().toString() + "\" " + "-" + binding.authorTxtView.getText().toString();
+                String shareText = "\"" + binding.quoteTxtView.getText().toString() + "\"" + "-" + binding.authorTxtView.getText().toString();
                 Intent sendIntent = new Intent();
                 sendIntent.setAction(Intent.ACTION_SEND);
                 sendIntent.putExtra(Intent.EXTRA_TEXT, shareText);

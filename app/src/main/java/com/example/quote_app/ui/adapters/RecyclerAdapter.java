@@ -56,7 +56,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     protected class ViewHolder extends RecyclerView.ViewHolder {
 
         private TextView quoteTextView, authorTextView;
-        private ImageView heartImageView;
+        private ImageView heartImageView, shareImageView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -64,6 +64,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
             quoteTextView = itemView.findViewById(R.id.quote_txt_view);
             authorTextView = itemView.findViewById(R.id.author_txt_view);
             heartImageView = itemView.findViewById(R.id.imageView);
+            shareImageView = itemView.findViewById(R.id.share_image_view);
 
             heartImageView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -72,6 +73,18 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
                         int position = getAdapterPosition();
                         if (position != RecyclerView.NO_POSITION) {
                             listener.onHeartClick(position);
+                        }
+                    }
+                }
+            });
+
+            shareImageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null) {
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION) {
+                            listener.onShareClick(position);
                         }
                     }
                 }
@@ -86,6 +99,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     
     public interface OnItemClickListener{
         void onHeartClick(int position);
+        void onShareClick(int position);
     }
 }
 

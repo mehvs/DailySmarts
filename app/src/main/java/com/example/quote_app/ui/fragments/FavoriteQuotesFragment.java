@@ -1,5 +1,6 @@
 package com.example.quote_app.ui.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -59,11 +60,27 @@ public class FavoriteQuotesFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         recyclerView.setAdapter(recyclerAdapter);
         recyclerAdapter.setOnItemClickListener(new RecyclerAdapter.OnItemClickListener() {
+
             @Override
             public void onHeartClick(int position) {
                 quoteViewModel.delete(recyclerAdapter.getQuoteAt(position));
             }
+
+            @Override
+            public void onShareClick(int position) {
+                recyclerAdapter.getQuoteAt(position).getQuoteText().toString();
+                recyclerAdapter.getQuoteAt(position).getAuthor().toString();
+
+                String shareText = "\"" + recyclerAdapter.getQuoteAt(position).getQuoteText().toString() + "\"" + "-" + recyclerAdapter.getQuoteAt(position).getAuthor().toString();
+                Intent sendIntent = new Intent();
+                sendIntent.setAction(Intent.ACTION_SEND);
+                sendIntent.putExtra(Intent.EXTRA_TEXT, shareText);
+                sendIntent.setType("text/*");
+                Intent shareIntent = Intent.createChooser(sendIntent, null);
+                startActivity(shareIntent);
+            }
         });
+
     }
 
 
