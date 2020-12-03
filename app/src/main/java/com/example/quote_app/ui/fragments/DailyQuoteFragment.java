@@ -11,7 +11,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.quote_app.R;
@@ -77,7 +76,8 @@ public class DailyQuoteFragment extends Fragment {
         ((MainActivity)getActivity()).setListener(new MainActivity.OnRefreshClickListener() {
             @Override
             public void onRefreshClick() {
-
+                onGetQuoteClicked();
+                removeClickOnHeartButton();
             }
         });
     }
@@ -86,12 +86,16 @@ public class DailyQuoteFragment extends Fragment {
         binding.swiperefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                isHeartClicked = false;
                 onGetQuoteClicked();
-                binding.imageView.setBackgroundResource(R.drawable.ic_favorite_border_black_24px);
+                removeClickOnHeartButton();
                 binding.swiperefresh.setRefreshing(false);
             }
         });
+    }
+
+    private void removeClickOnHeartButton(){
+        isHeartClicked = false;
+        binding.imageView.setBackgroundResource(R.drawable.ic_favorite_border_black_24px);
     }
 
     private void setupHeartButton() {
@@ -107,8 +111,7 @@ public class DailyQuoteFragment extends Fragment {
                     isHeartClicked = true;
                 } else {
                     quoteViewModel.deleteByQuoteText(binding.quoteTxtView.getText().toString());
-                    binding.imageView.setBackgroundResource(R.drawable.ic_favorite_border_black_24px);
-                    isHeartClicked = false;
+                    removeClickOnHeartButton();
                 }
             }
         });
