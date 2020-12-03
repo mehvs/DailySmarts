@@ -23,7 +23,7 @@ public class DailyQuoteFragment extends Fragment {
 
     private FragmentDailyQuoteBinding binding;
     private QuoteViewModel quoteViewModel;
-
+    private Boolean isHeartClicked = false;
     public DailyQuoteFragment() {
 
     }
@@ -31,8 +31,6 @@ public class DailyQuoteFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Bundle bundle = getArguments();
-
         onGetQuoteClicked();
     }
 
@@ -72,26 +70,28 @@ public class DailyQuoteFragment extends Fragment {
         ((MainActivity)getActivity()).setListener(new MainActivity.OnRefreshClickListener() {
             @Override
             public void onRefreshClick() {
+                isHeartClicked = false;
                 onGetQuoteClicked();
+                binding.imageView.setBackgroundResource(R.drawable.ic_favorite_border_black_24px);
             }
         });
     }
 
     private void setupHeartButton() {
         binding.imageView.setOnClickListener(new View.OnClickListener() {
-            Boolean isClicked = false;
+
 
             @Override
             public void onClick(View v) {
-                if (!isClicked) {
+                if (!isHeartClicked) {
                     Quote quote = new Quote(binding.quoteTxtView.getText().toString(), binding.authorTxtView.getText().toString());
                     quoteViewModel.insert(quote);
                     binding.imageView.setBackgroundResource(R.drawable.ic_favorite_black_24px);
-                    isClicked = true;
+                    isHeartClicked = true;
                 } else {
                     quoteViewModel.deleteByQuoteText(binding.quoteTxtView.getText().toString());
                     binding.imageView.setBackgroundResource(R.drawable.ic_favorite_border_black_24px);
-                    isClicked = false;
+                    isHeartClicked = false;
                 }
             }
         });

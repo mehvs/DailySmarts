@@ -55,8 +55,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
     protected class ViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView quoteTextView, authorTextView;
-        private ImageView heartImageView, shareImageView;
+        TextView quoteTextView, authorTextView;
+        ImageView heartImageView, shareImageView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
