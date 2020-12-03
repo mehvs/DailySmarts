@@ -1,5 +1,6 @@
 package com.example.quote_app.ui.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,16 +38,11 @@ public class FavoriteQuotesFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         View view = inflater.inflate(R.layout.fragment_favorite_quotes, container, false);
 
-        recyclerView = view.findViewById(R.id.recyclerView);
-        recyclerAdapter = new RecyclerAdapter();
-        recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        recyclerView.setAdapter(recyclerAdapter);
+        buildRecyclerView(view);
 
         return view;
-
     }
 
     @Override
@@ -55,4 +51,37 @@ public class FavoriteQuotesFragment extends Fragment {
         quoteViewModel = new ViewModelProvider(this).get(QuoteViewModel.class);
         quoteViewModel.getAllQuotes().observe(getViewLifecycleOwner(), quotes -> recyclerAdapter.setQuotes(quotes));
     }
+
+
+
+    public void buildRecyclerView(View view){
+        recyclerView = view.findViewById(R.id.recyclerView);
+        recyclerAdapter = new RecyclerAdapter();
+        recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+        recyclerView.setAdapter(recyclerAdapter);
+        recyclerAdapter.setOnItemClickListener(new RecyclerAdapter.OnItemClickListener() {
+
+            @Override
+            public void onHeartClick(int position) {
+                quoteViewModel.delete(recyclerAdapter.getQuoteAt(position));
+            }
+
+            @Override
+            public void onShareClick(int position) {
+                recyclerAdapter.getQuoteAt(position).getQuoteText().toString();
+                recyclerAdapter.getQuoteAt(position).getAuthor().toString();
+
+                String shareText = "\"" + recyclerAdapter.getQuoteAt(position).getQuoteText().toString() + "\"" + "-" + recyclerAdapter.getQuoteAt(position).getAuthor().toString();
+                Intent sendIntent = new Intent();
+                sendIntent.setAction(Intent.ACTION_SEND);
+                sendIntent.putExtra(Intent.EXTRA_TEXT, shareText);
+                sendIntent.setType("text/*");
+                Intent shareIntent = Intent.createChooser(sendIntent, null);
+                startActivity(shareIntent);
+            }
+        });
+
+    }
+
+
 }

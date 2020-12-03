@@ -28,12 +28,14 @@ public class QuoteRepository {
     }
 
     public void delete(Quote quote) {
-        new DeleteNoteAsyncTask(quoteDao).execute(quote);
+        new DeleteQuoteAsyncTask(quoteDao).execute(quote);
     }
 
     public void deleteAllQuotes() {
         new DeleteAllQuotesAsyncTask(quoteDao).execute();
     }
+
+    public void deleteByQuoteText(String string) {new DeleteByQuoteTextAsyncTask(quoteDao).execute(string);}
 
     public LiveData<List<Quote>> getAllQuotes() {
         return allQuotes;
@@ -67,10 +69,10 @@ public class QuoteRepository {
         }
     }
 
-    private static class DeleteNoteAsyncTask extends AsyncTask<Quote, Void, Void> {
+    private static class DeleteQuoteAsyncTask extends AsyncTask<Quote, Void, Void> {
         private QuoteDao quoteDao;
 
-        private DeleteNoteAsyncTask(QuoteDao noteDao) {
+        private DeleteQuoteAsyncTask(QuoteDao noteDao) {
             this.quoteDao = noteDao;
         }
 
@@ -91,6 +93,21 @@ public class QuoteRepository {
         @Override
         protected Void doInBackground(Void... voids) {
             quoteDao.deleteAllQuotes();
+            return null;
+        }
+    }
+
+    private static class DeleteByQuoteTextAsyncTask extends AsyncTask<String, Void, Void> {
+        private QuoteDao quoteDao;
+
+        private DeleteByQuoteTextAsyncTask(QuoteDao noteDao) {
+            this.quoteDao = noteDao;
+        }
+
+
+        @Override
+        protected Void doInBackground(String... strings) {
+            quoteDao.deleteByQuoteText(strings[0]);
             return null;
         }
     }

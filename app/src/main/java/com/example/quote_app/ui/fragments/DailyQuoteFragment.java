@@ -1,16 +1,21 @@
 package com.example.quote_app.ui.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.example.quote_app.R;
 import com.example.quote_app.database.model.Quote;
 import com.example.quote_app.databinding.FragmentDailyQuoteBinding;
 import com.example.quote_app.retrofit.ApiServer;
+import com.example.quote_app.ui.activities.MainActivity;
 import com.example.quote_app.ui.viewmodels.QuoteViewModel;
 
 
@@ -26,27 +31,23 @@ public class DailyQuoteFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Bundle bundle = getArguments();
+
         onGetQuoteClicked();
-
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
+        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
         binding = FragmentDailyQuoteBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
-        binding.imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Quote quote = new Quote(binding.quoteTxtView.getText().toString(), binding.authorTxtView.getText().toString());
-                quoteViewModel = ViewModelProviders.of(getActivity()).get(QuoteViewModel.class);
-                quoteViewModel.insert(quote);
-            }
-        });
+        quoteViewModel = ViewModelProviders.of(getActivity()).get(QuoteViewModel.class);
+
+        listenForRefresh();
+        setupHeartButton();
+        setupShareButton();
+
         return view;
-
-
     }
 
     private void onGetQuoteClicked() {
@@ -66,4 +67,50 @@ public class DailyQuoteFragment extends Fragment {
 
 
     }
+
+    private void listenForRefresh(){
+        ((MainActivity)getActivity()).setListener(new MainActivity.OnRefreshClickListener() {
+            @Override
+            public void onRefreshClick() {
+                onGetQuoteClicked();
+            }
+        });
+    }
+
+    private void setupHeartButton() {
+        binding.imageView.setOnClickListener(new View.OnClickListener() {
+            Boolean isClicked = false;
+
+            @Override
+            public void onClick(View v) {
+                if (!isClicked) {
+                    Quote quote = new Quote(binding.quoteTxtView.getText().toString(), binding.authorTxtView.getText().toString());
+                    quoteViewModel.insert(quote);
+                    binding.imageView.setBackgroundResource(R.drawable.ic_favorite_black_24px);
+                    isClicked = true;
+                } else {
+                    quoteViewModel.deleteByQuoteText(binding.quoteTxtView.getText().toString());
+                    binding.imageView.setBackgroundResource(R.drawable.ic_favorite_border_black_24px);
+                    isClicked = false;
+                }
+            }
+        });
+    }
+
+    private void setupShareButton() {
+        binding.shareImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String shareText = "\"" + binding.quoteTxtView.getText().toString() + "\"" + "-" + binding.authorTxtView.getText().toString();
+                Intent sendIntent = new Intent();
+                sendIntent.setAction(Intent.ACTION_SEND);
+                sendIntent.putExtra(Intent.EXTRA_TEXT, shareText);
+                sendIntent.setType("text/*");
+                Intent shareIntent = Intent.createChooser(sendIntent, null);
+                startActivity(shareIntent);
+            }
+        });
+    }
+
+
 }

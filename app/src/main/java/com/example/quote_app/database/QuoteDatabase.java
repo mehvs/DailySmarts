@@ -10,7 +10,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.example.quote_app.database.model.Quote;
 
-@Database(entities = {Quote.class}, version = 2)
+@Database(entities = {Quote.class}, version = 3)
 public abstract class QuoteDatabase extends RoomDatabase {
     private static QuoteDatabase instance;
 

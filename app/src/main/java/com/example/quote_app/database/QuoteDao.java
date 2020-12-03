@@ -27,4 +27,7 @@ public interface QuoteDao {
 
     @Query("SELECT * FROM quote_table")
     LiveData<List<Quote>> getAllQuotes();
+
+    @Query("DELETE FROM quote_table WHERE quote_text = :quote")
+    void deleteByQuoteText(String quote);
 }

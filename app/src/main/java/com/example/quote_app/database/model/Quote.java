@@ -1,5 +1,6 @@
 package com.example.quote_app.database.model;
 
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -7,6 +8,8 @@ import androidx.room.PrimaryKey;
 public class Quote {
     @PrimaryKey(autoGenerate = true)
     private int id;
+
+    @ColumnInfo(name = "quote_text")
     private String quoteText;
     private String author;
 

@@ -3,6 +3,8 @@ package com.example.quote_app.ui.adapters;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,7 +18,9 @@ import java.util.List;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
 
-    List<Quote> quotes = new ArrayList<>();
+    private List<Quote> quotes = new ArrayList<>();
+    private OnItemClickListener listener;
+
 
     @NonNull
     @Override
@@ -45,17 +49,57 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         notifyDataSetChanged();
     }
 
+    public Quote getQuoteAt(int position) {
+        return quotes.get(position);
+    }
+
     protected class ViewHolder extends RecyclerView.ViewHolder {
 
         private TextView quoteTextView, authorTextView;
+        private ImageView heartImageView, shareImageView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             quoteTextView = itemView.findViewById(R.id.quote_txt_view);
             authorTextView = itemView.findViewById(R.id.author_txt_view);
+            heartImageView = itemView.findViewById(R.id.imageView);
+            shareImageView = itemView.findViewById(R.id.share_image_view);
+
+            heartImageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null) {
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION) {
+                            listener.onHeartClick(position);
+                        }
+                    }
+                }
+            });
+
+            shareImageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null) {
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION) {
+                            listener.onShareClick(position);
+                        }
+                    }
+                }
+            });
 
         }
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener){
+        this.listener = listener;
+    }
+    
+    public interface OnItemClickListener{
+        void onHeartClick(int position);
+        void onShareClick(int position);
     }
 }
 

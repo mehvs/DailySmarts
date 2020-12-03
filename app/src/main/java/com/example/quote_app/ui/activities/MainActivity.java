@@ -1,5 +1,6 @@
 package com.example.quote_app.ui.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -9,8 +10,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.example.quote_app.retrofit.ApiServer;
 import com.example.quote_app.ui.adapters.QuotePagerAdapter;
 import com.example.quote_app.databinding.ActivityMainBinding;
+import com.example.quote_app.ui.fragments.DailyQuoteFragment;
 import com.example.quote_app.ui.viewmodels.QuoteViewModel;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
@@ -21,23 +24,22 @@ public class MainActivity extends AppCompatActivity {
     private Toolbar toolBar;
     private ViewPager2 viewPager2;
     private TabLayout tabLayout;
+    private OnRefreshClickListener listener;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
-        setContentView(view);
 
+        setContentView(view);
+        setRefreshButton();
         setToolBar();
         setViewPager2();
         setTabLayout();
 
-
     }
-
 
     private void setToolBar() {
         toolBar = binding.toolBar;
@@ -68,6 +70,29 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         tabLayoutMediator.attach();
+    }
+
+    private void setRefreshButton() {
+        binding.refreshImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (getListener() != null) {
+                    getListener().onRefreshClick();
+                }
+            }
+        });
+    }
+
+    public OnRefreshClickListener getListener() {
+        return listener;
+    }
+
+    public void setListener(OnRefreshClickListener listener) {
+        this.listener = listener;
+    }
+
+    public interface OnRefreshClickListener {
+        void onRefreshClick();
     }
 
 
