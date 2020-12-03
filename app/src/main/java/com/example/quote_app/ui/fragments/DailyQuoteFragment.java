@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
@@ -39,10 +40,12 @@ public class DailyQuoteFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
         binding = FragmentDailyQuoteBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
-        quoteViewModel = ViewModelProviders.of(getActivity()).get(QuoteViewModel.class);
+
+        quoteViewModel = new ViewModelProvider(this).get(QuoteViewModel.class);
 
         setupSwipeDownRefresh();
         listenForRefresh();
