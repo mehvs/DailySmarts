@@ -48,7 +48,7 @@ public class DailyQuoteFragment extends Fragment {
         View view = binding.getRoot();
 
         quoteViewModel = new ViewModelProvider(this).get(QuoteViewModel.class);
-        
+
         setupSwipeDownRefresh();
         listenForRefresh();
         setupHeartButton();
@@ -93,31 +93,19 @@ public class DailyQuoteFragment extends Fragment {
 
     }
 
-    private void listenForRefresh(){
-        ((MainActivity)getActivity()).setListener(new MainActivity.OnRefreshClickListener() {
+    private void listenForRefresh() {
+        ((MainActivity) getActivity()).setListener(new MainActivity.OnRefreshClickListener() {
             @Override
             public void onRefreshClick() {
                 getQuoteBasedOnLanguage();
                 removeClickOnHeartButton();
             }
 
-            @Override
-            public void onIsChecked(boolean isChecked) {
-                Toast toast;
-                if(isChecked){
-                    toast = Toast.makeText(getActivity(), "is checked", Toast.LENGTH_LONG);
-                    toast.show();
-                }
 
-                if(!isChecked){
-                    toast = Toast.makeText(getActivity(), "is not checked", Toast.LENGTH_LONG);
-                    toast.show();
-                }
-            }
         });
     }
 
-    private void setupSwipeDownRefresh(){
+    private void setupSwipeDownRefresh() {
         binding.swiperefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -128,7 +116,7 @@ public class DailyQuoteFragment extends Fragment {
         });
     }
 
-    private void removeClickOnHeartButton(){
+    private void removeClickOnHeartButton() {
         isHeartClicked = false;
         binding.imageView.setBackgroundResource(R.drawable.ic_favorite_border_black_24px);
     }
@@ -167,13 +155,13 @@ public class DailyQuoteFragment extends Fragment {
         });
     }
 
-    private boolean getSwitchStatus(){
-        SwitchCompat thumbSwitch = ((MainActivity)(Objects.requireNonNull(getActivity()))).findViewById(R.id.thumbSwitch);
+    private boolean getSwitchStatus() {
+        SwitchCompat thumbSwitch = ((MainActivity) (Objects.requireNonNull(getActivity()))).findViewById(R.id.thumbSwitch);
         return thumbSwitch.isChecked();
     }
 
-    private void getQuoteBasedOnLanguage(){
-        if(!getSwitchStatus()){
+    private void getQuoteBasedOnLanguage() {
+        if (!getSwitchStatus()) {
             onGetQuoteClickedEnglish();
         } else {
             onGetQuoteClickedRussian();

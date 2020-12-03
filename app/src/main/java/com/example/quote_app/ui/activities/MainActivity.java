@@ -72,21 +72,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void passSwitchStatus(){
-        binding.thumbSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(getListener() != null) {
-                    getListener().onIsChecked(isChecked);
-                }
-            }
-        });
-    }
-
-
-
-
-
     public OnRefreshClickListener getListener() {
         return listener;
     }
@@ -97,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
 
     public interface OnRefreshClickListener {
         void onRefreshClick();
-        void onIsChecked(boolean isChecked);
+
     }
 
 
