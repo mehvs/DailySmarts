@@ -26,9 +26,33 @@ public class ApiServer {
         return instance;
     }
 
-    public void getRandomQuote(final ApiListener listener) {
+    public void getRandomQuoteEnglish(final ApiListener listener) {
 
-        service.randomQuote().enqueue(new Callback<Quote>() {
+        service.randomQuoteEnglish().enqueue(new Callback<Quote>() {
+            @Override
+            public void onResponse(Call<Quote> call, Response<Quote> response) {
+
+                if (response.isSuccessful()) {
+
+                    listener.onQuoteReceived(response.body().getQuoteText(), response.body().getQuoteAuthor());
+                } else {
+                    listener.onFailure();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Quote> call, Throwable t) {
+
+                listener.onFailure();
+            }
+        });
+
+
+    }
+
+    public void getRandomQuoteRussian(final ApiListener listener) {
+
+        service.randomQuoteRussian().enqueue(new Callback<Quote>() {
             @Override
             public void onResponse(Call<Quote> call, Response<Quote> response) {
 

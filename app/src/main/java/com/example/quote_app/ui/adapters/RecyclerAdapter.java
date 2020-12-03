@@ -21,14 +21,12 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     private List<Quote> quotes = new ArrayList<>();
     private OnItemClickListener listener;
 
-
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View view = layoutInflater.inflate(R.layout.row_item, parent, false);
-        ViewHolder viewHolder = new ViewHolder(view);
-        return viewHolder;
+        return new ViewHolder(view);
     }
 
     @Override
@@ -55,8 +53,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
     protected class ViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView quoteTextView, authorTextView;
-        private ImageView heartImageView, shareImageView;
+        TextView quoteTextView, authorTextView;
+        ImageView heartImageView, shareImageView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

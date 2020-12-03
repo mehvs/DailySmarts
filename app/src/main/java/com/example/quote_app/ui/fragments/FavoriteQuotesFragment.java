@@ -52,8 +52,6 @@ public class FavoriteQuotesFragment extends Fragment {
         quoteViewModel.getAllQuotes().observe(getViewLifecycleOwner(), quotes -> recyclerAdapter.setQuotes(quotes));
     }
 
-
-
     public void buildRecyclerView(View view){
         recyclerView = view.findViewById(R.id.recyclerView);
         recyclerAdapter = new RecyclerAdapter();

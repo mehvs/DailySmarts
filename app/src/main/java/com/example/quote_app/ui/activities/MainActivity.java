@@ -1,31 +1,23 @@
 package com.example.quote_app.ui.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
+import android.widget.CompoundButton;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.viewpager2.widget.ViewPager2;
 
-import com.example.quote_app.retrofit.ApiServer;
 import com.example.quote_app.ui.adapters.QuotePagerAdapter;
 import com.example.quote_app.databinding.ActivityMainBinding;
-import com.example.quote_app.ui.fragments.DailyQuoteFragment;
-import com.example.quote_app.ui.viewmodels.QuoteViewModel;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
-    private Toolbar toolBar;
-    private ViewPager2 viewPager2;
-    private TabLayout tabLayout;
     private OnRefreshClickListener listener;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,18 +34,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setToolBar() {
-        toolBar = binding.toolBar;
-        setSupportActionBar(toolBar);
+        setSupportActionBar(binding.toolBar);
     }
 
     private void setViewPager2() {
-        viewPager2 = binding.viewPager;
-        viewPager2.setAdapter(new QuotePagerAdapter(this));
+        binding.viewPager.setAdapter(new QuotePagerAdapter(this));
     }
 
     private void setTabLayout() {
-        tabLayout = binding.tabLayout;
-        TabLayoutMediator tabLayoutMediator = new TabLayoutMediator(tabLayout, viewPager2, new TabLayoutMediator.TabConfigurationStrategy() {
+        TabLayoutMediator tabLayoutMediator = new TabLayoutMediator(binding.tabLayout, binding.viewPager, new TabLayoutMediator.TabConfigurationStrategy() {
             @Override
             public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
                 switch (position) {
@@ -93,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
 
     public interface OnRefreshClickListener {
         void onRefreshClick();
+
     }
 
 
