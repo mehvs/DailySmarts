@@ -15,6 +15,7 @@ import com.example.quote_app.R;
 import com.example.quote_app.database.model.Quote;
 import com.example.quote_app.databinding.FragmentDailyQuoteBinding;
 import com.example.quote_app.retrofit.ApiServer;
+import com.example.quote_app.ui.activities.MainActivity;
 import com.example.quote_app.ui.viewmodels.QuoteViewModel;
 
 
@@ -30,8 +31,9 @@ public class DailyQuoteFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        onGetQuoteClicked();
+        Bundle bundle = getArguments();
 
+        onGetQuoteClicked();
     }
 
     @Override
@@ -41,6 +43,7 @@ public class DailyQuoteFragment extends Fragment {
         View view = binding.getRoot();
         quoteViewModel = ViewModelProviders.of(getActivity()).get(QuoteViewModel.class);
 
+        listenForRefresh();
         setupHeartButton();
         setupShareButton();
 
@@ -63,6 +66,15 @@ public class DailyQuoteFragment extends Fragment {
         });
 
 
+    }
+
+    private void listenForRefresh(){
+        ((MainActivity)getActivity()).setListener(new MainActivity.OnRefreshClickListener() {
+            @Override
+            public void onRefreshClick() {
+                onGetQuoteClicked();
+            }
+        });
     }
 
     private void setupHeartButton() {
