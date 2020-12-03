@@ -2,6 +2,7 @@ package com.example.quote_app.ui.activities;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.CompoundButton;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -71,6 +72,19 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private void passSwitchStatus(){
+        binding.thumbSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(getListener() != null) {
+                    getListener().onIsChecked(isChecked);
+                }
+            }
+        });
+    }
+
+
+
 
 
     public OnRefreshClickListener getListener() {
@@ -83,6 +97,7 @@ public class MainActivity extends AppCompatActivity {
 
     public interface OnRefreshClickListener {
         void onRefreshClick();
+        void onIsChecked(boolean isChecked);
     }
 
 

@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -19,6 +20,8 @@ import com.example.quote_app.databinding.FragmentDailyQuoteBinding;
 import com.example.quote_app.retrofit.ApiServer;
 import com.example.quote_app.ui.activities.MainActivity;
 import com.example.quote_app.ui.viewmodels.QuoteViewModel;
+
+import java.util.Objects;
 
 
 public class DailyQuoteFragment extends Fragment {
@@ -34,7 +37,7 @@ public class DailyQuoteFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        onGetQuoteClicked();
+        getQuoteBasedOnLanguage();
     }
 
     @Override
@@ -45,7 +48,7 @@ public class DailyQuoteFragment extends Fragment {
         View view = binding.getRoot();
 
         quoteViewModel = new ViewModelProvider(this).get(QuoteViewModel.class);
-
+        
         setupSwipeDownRefresh();
         listenForRefresh();
         setupHeartButton();
@@ -54,9 +57,27 @@ public class DailyQuoteFragment extends Fragment {
         return view;
     }
 
-    private void onGetQuoteClicked() {
+    private void onGetQuoteClickedEnglish() {
 
-        ApiServer.getInstance().getRandomQuote(new ApiServer.ApiListener() {
+        ApiServer.getInstance().getRandomQuoteEnglish(new ApiServer.ApiListener() {
+            @Override
+            public void onQuoteReceived(String quote, String author) {
+                binding.quoteTxtView.setText(quote);
+                binding.authorTxtView.setText(author);
+            }
+
+            @Override
+            public void onFailure() {
+                Toast.makeText(getActivity(), "Quote can't be retrieved, check if you have internet access", Toast.LENGTH_LONG).show();
+            }
+        });
+
+
+    }
+
+    private void onGetQuoteClickedRussian() {
+
+        ApiServer.getInstance().getRandomQuoteRussian(new ApiServer.ApiListener() {
             @Override
             public void onQuoteReceived(String quote, String author) {
                 binding.quoteTxtView.setText(quote);
@@ -76,8 +97,22 @@ public class DailyQuoteFragment extends Fragment {
         ((MainActivity)getActivity()).setListener(new MainActivity.OnRefreshClickListener() {
             @Override
             public void onRefreshClick() {
-                onGetQuoteClicked();
+                getQuoteBasedOnLanguage();
                 removeClickOnHeartButton();
+            }
+
+            @Override
+            public void onIsChecked(boolean isChecked) {
+                Toast toast;
+                if(isChecked){
+                    toast = Toast.makeText(getActivity(), "is checked", Toast.LENGTH_LONG);
+                    toast.show();
+                }
+
+                if(!isChecked){
+                    toast = Toast.makeText(getActivity(), "is not checked", Toast.LENGTH_LONG);
+                    toast.show();
+                }
             }
         });
     }
@@ -86,7 +121,7 @@ public class DailyQuoteFragment extends Fragment {
         binding.swiperefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                onGetQuoteClicked();
+                getQuoteBasedOnLanguage();
                 removeClickOnHeartButton();
                 binding.swiperefresh.setRefreshing(false);
             }
@@ -130,6 +165,19 @@ public class DailyQuoteFragment extends Fragment {
                 startActivity(shareIntent);
             }
         });
+    }
+
+    private boolean getSwitchStatus(){
+        SwitchCompat thumbSwitch = ((MainActivity)(Objects.requireNonNull(getActivity()))).findViewById(R.id.thumbSwitch);
+        return thumbSwitch.isChecked();
+    }
+
+    private void getQuoteBasedOnLanguage(){
+        if(!getSwitchStatus()){
+            onGetQuoteClickedEnglish();
+        } else {
+            onGetQuoteClickedRussian();
+        }
     }
 
 

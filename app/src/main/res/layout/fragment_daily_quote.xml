@@ -41,11 +41,13 @@
                     android:layout_width="wrap_content"
 
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginLeft="16dp"
                     app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/quote_txt_view"
                     app:srcCompat="@drawable/ic_favorite_border_black_24px"
-                    tools:ignore="VectorDrawableCompat"
-                    tools:layout_editor_absoluteX="16dp" />
+                    tools:ignore="VectorDrawableCompat" />
 
                 <ImageView
                     android:id="@+id/share_img"
@@ -60,7 +62,7 @@
 
                 <TextView
                     android:id="@+id/author_txt_view"
-                    android:layout_width="240dp"
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:gravity="end"
                     android:textAlignment="textEnd"
