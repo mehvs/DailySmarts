@@ -10,6 +10,7 @@ import com.example.quote_app.database.model.Quote;
 import java.util.List;
 
 public class QuoteRepository {
+
     private QuoteDao quoteDao;
     private LiveData<List<Quote>> allQuotes;
 

@@ -5,6 +5,8 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.quote_app.ui.adapters.QuotePagerAdapter;
 import com.example.quote_app.databinding.ActivityMainBinding;
@@ -68,6 +70,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+
 
     public OnRefreshClickListener getListener() {
         return listener;

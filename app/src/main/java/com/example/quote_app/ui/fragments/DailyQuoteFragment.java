@@ -5,11 +5,13 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.quote_app.R;
 import com.example.quote_app.database.model.Quote;
@@ -24,6 +26,7 @@ public class DailyQuoteFragment extends Fragment {
     private FragmentDailyQuoteBinding binding;
     private QuoteViewModel quoteViewModel;
     private Boolean isHeartClicked = false;
+
     public DailyQuoteFragment() {
 
     }
@@ -41,6 +44,7 @@ public class DailyQuoteFragment extends Fragment {
         View view = binding.getRoot();
         quoteViewModel = ViewModelProviders.of(getActivity()).get(QuoteViewModel.class);
 
+        setupSwipeDownRefresh();
         listenForRefresh();
         setupHeartButton();
         setupShareButton();
@@ -59,7 +63,7 @@ public class DailyQuoteFragment extends Fragment {
 
             @Override
             public void onFailure() {
-                //Toast.makeText(DailyQuoteFragment.this, "Something happened", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), "Quote can't be retrieved, check if you have internet access", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -70,9 +74,19 @@ public class DailyQuoteFragment extends Fragment {
         ((MainActivity)getActivity()).setListener(new MainActivity.OnRefreshClickListener() {
             @Override
             public void onRefreshClick() {
+
+            }
+        });
+    }
+
+    private void setupSwipeDownRefresh(){
+        binding.swiperefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
                 isHeartClicked = false;
                 onGetQuoteClicked();
                 binding.imageView.setBackgroundResource(R.drawable.ic_favorite_border_black_24px);
+                binding.swiperefresh.setRefreshing(false);
             }
         });
     }
