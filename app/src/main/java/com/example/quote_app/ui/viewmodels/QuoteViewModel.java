@@ -12,6 +12,7 @@ import com.example.quote_app.data.database.model.Quote;
 import java.util.List;
 
 public class QuoteViewModel extends AndroidViewModel {
+
     private QuoteRepository repository;
     private LiveData<List<Quote>> allQuotes;
 
@@ -37,8 +38,8 @@ public class QuoteViewModel extends AndroidViewModel {
         repository.deleteAllQuotes();
     }
 
-    public void deleteByQuoteText(String string) {
-        repository.deleteByQuoteText(string);
+    public void deleteByQuoteText(String quoteText) {
+        repository.deleteByQuoteText(quoteText);
     }
 
     public LiveData<List<Quote>> getAllQuotes() {
