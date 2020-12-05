@@ -37,7 +37,9 @@ public class QuoteViewModel extends AndroidViewModel {
         repository.deleteAllQuotes();
     }
 
-    public void deleteByQuoteText(String string) {repository.deleteByQuoteText(string);}
+    public void deleteByQuoteText(String string) {
+        repository.deleteByQuoteText(string);
+    }
 
     public LiveData<List<Quote>> getAllQuotes() {
         return allQuotes;

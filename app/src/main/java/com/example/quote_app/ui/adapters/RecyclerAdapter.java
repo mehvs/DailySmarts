@@ -3,7 +3,6 @@ package com.example.quote_app.ui.adapters;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -91,12 +90,13 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         }
     }
 
-    public void setOnItemClickListener(OnItemClickListener listener){
+    public void setOnItemClickListener(OnItemClickListener listener) {
         this.listener = listener;
     }
-    
-    public interface OnItemClickListener{
+
+    public interface OnItemClickListener {
         void onHeartClick(int position);
+
         void onShareClick(int position);
     }
 }
