@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.quote_app.R;
-import com.example.quote_app.database.model.Quote;
+import com.example.quote_app.data.database.model.Quote;
 
 import java.util.ArrayList;
 import java.util.List;
