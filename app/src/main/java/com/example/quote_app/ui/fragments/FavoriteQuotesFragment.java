@@ -60,15 +60,15 @@ public class FavoriteQuotesFragment extends Fragment {
 
             @Override
             public void onShareClick(int position) {
-                recyclerAdapter.getQuoteAt(position).getQuoteText().toString();
-                recyclerAdapter.getQuoteAt(position).getAuthor().toString();
 
-                String shareText = "\"" + recyclerAdapter.getQuoteAt(position).getQuoteText().toString() + "\"" + "-" + recyclerAdapter.getQuoteAt(position).getAuthor().toString();
+                String shareText = "\"" + recyclerAdapter.getQuoteAt(position).getQuoteText() + "\"" + "-" + recyclerAdapter.getQuoteAt(position).getAuthor();
+
                 Intent sendIntent = new Intent();
                 sendIntent.setAction(Intent.ACTION_SEND);
                 sendIntent.putExtra(Intent.EXTRA_TEXT, shareText);
                 sendIntent.setType("text/*");
                 Intent shareIntent = Intent.createChooser(sendIntent, null);
+
                 startActivity(shareIntent);
             }
         });

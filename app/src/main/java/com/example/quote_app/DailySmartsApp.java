@@ -6,7 +6,6 @@ public class DailySmartsApp extends Application {
 
     @Override
     public void onCreate() {
-
         super.onCreate();
     }
 }
