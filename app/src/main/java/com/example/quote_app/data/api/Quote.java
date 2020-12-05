@@ -1,4 +1,4 @@
-package com.example.quote_app.database.api;
+package com.example.quote_app.data.api;
 
 
 import com.google.gson.annotations.SerializedName;

@@ -1,11 +1,11 @@
-package com.example.quote_app.database;
+package com.example.quote_app.data.database;
 
 import android.app.Application;
 import android.os.AsyncTask;
 
 import androidx.lifecycle.LiveData;
 
-import com.example.quote_app.database.model.Quote;
+import com.example.quote_app.data.database.model.Quote;
 
 import java.util.List;
 

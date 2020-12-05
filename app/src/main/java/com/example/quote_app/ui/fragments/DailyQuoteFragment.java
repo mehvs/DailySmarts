@@ -14,9 +14,9 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.quote_app.R;
-import com.example.quote_app.database.model.Quote;
+import com.example.quote_app.data.database.model.Quote;
 import com.example.quote_app.databinding.FragmentDailyQuoteBinding;
-import com.example.quote_app.database.api.ApiServer;
+import com.example.quote_app.data.api.ApiServer;
 import com.example.quote_app.ui.activities.MainActivity;
 import com.example.quote_app.ui.viewmodels.QuoteViewModel;
 

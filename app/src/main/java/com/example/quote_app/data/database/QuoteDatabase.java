@@ -1,4 +1,4 @@
-package com.example.quote_app.database;
+package com.example.quote_app.data.database;
 
 import android.content.Context;
 
@@ -8,7 +8,7 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-import com.example.quote_app.database.model.Quote;
+import com.example.quote_app.data.database.model.Quote;
 
 @Database(entities = {Quote.class}, version = 3)
 public abstract class QuoteDatabase extends RoomDatabase {

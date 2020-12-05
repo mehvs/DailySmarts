@@ -6,8 +6,8 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-import com.example.quote_app.database.QuoteRepository;
-import com.example.quote_app.database.model.Quote;
+import com.example.quote_app.data.database.QuoteRepository;
+import com.example.quote_app.data.database.model.Quote;
 
 import java.util.List;
 
