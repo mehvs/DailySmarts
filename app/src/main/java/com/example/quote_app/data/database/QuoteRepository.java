@@ -36,8 +36,8 @@ public class QuoteRepository {
         new DeleteAllQuotesAsyncTask(quoteDao).execute();
     }
 
-    public void deleteByQuoteText(String string) {
-        new DeleteByQuoteTextAsyncTask(quoteDao).execute(string);
+    public void deleteByQuoteText(String quoteText) {
+        new DeleteByQuoteTextAsyncTask(quoteDao).execute(quoteText);
     }
 
     public LiveData<List<Quote>> getAllQuotes() {
@@ -75,8 +75,8 @@ public class QuoteRepository {
     private static class DeleteQuoteAsyncTask extends AsyncTask<Quote, Void, Void> {
         private QuoteDao quoteDao;
 
-        private DeleteQuoteAsyncTask(QuoteDao noteDao) {
-            this.quoteDao = noteDao;
+        private DeleteQuoteAsyncTask(QuoteDao quoteDao) {
+            this.quoteDao = quoteDao;
         }
 
         @Override
@@ -103,8 +103,8 @@ public class QuoteRepository {
     private static class DeleteByQuoteTextAsyncTask extends AsyncTask<String, Void, Void> {
         private QuoteDao quoteDao;
 
-        private DeleteByQuoteTextAsyncTask(QuoteDao noteDao) {
-            this.quoteDao = noteDao;
+        private DeleteByQuoteTextAsyncTask(QuoteDao quoteDao) {
+            this.quoteDao = quoteDao;
         }
 
 
