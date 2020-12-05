@@ -1,15 +1,10 @@
-package com.example.quote_app.retrofit;
+package com.example.quote_app.database.api;
 
 
 import com.google.gson.annotations.SerializedName;
 
 
 public class Quote {
-
-    //{"quoteText":"Be less curious about people and more curious about ideas.  ",
-    // "quoteAuthor":"Marie Curie ", "senderName":"",
-    // "senderLink":"",
-    // "quoteLink":"http://forismatic.com/en/a562642f67/"}
 
     @SerializedName("quoteText")
     String quoteText;

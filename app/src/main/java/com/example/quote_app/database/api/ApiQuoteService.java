@@ -1,4 +1,4 @@
-package com.example.quote_app.retrofit;
+package com.example.quote_app.database.api;
 
 
 import retrofit2.Call;

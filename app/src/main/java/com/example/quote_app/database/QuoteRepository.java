@@ -36,7 +36,9 @@ public class QuoteRepository {
         new DeleteAllQuotesAsyncTask(quoteDao).execute();
     }
 
-    public void deleteByQuoteText(String string) {new DeleteByQuoteTextAsyncTask(quoteDao).execute(string);}
+    public void deleteByQuoteText(String string) {
+        new DeleteByQuoteTextAsyncTask(quoteDao).execute(string);
+    }
 
     public LiveData<List<Quote>> getAllQuotes() {
         return allQuotes;
